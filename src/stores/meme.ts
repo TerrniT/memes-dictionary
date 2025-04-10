@@ -3,14 +3,8 @@ import type { Meme } from '../types/meme'
 import { MockMemeStorage } from '../lib/storage/mock'
 import { SupabaseMemeStorage } from '../lib/storage/supabase'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || null
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY  || null
 
-if(!supabaseUrl || !supabaseKey) {
-  throw new Error('Meme Store: Missing Supabase credentials')
-}
-
-const storage = import.meta.env.DEV ? new MockMemeStorage() : new SupabaseMemeStorage(supabaseUrl, supabaseKey)
+const storage = import.meta.env.DEV ? new MockMemeStorage() : new SupabaseMemeStorage()
 
 export const useMemeStore = defineStore('meme', {
   state: () => ({

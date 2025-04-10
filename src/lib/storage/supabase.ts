@@ -1,11 +1,11 @@
-import { createClient } from '@supabase/supabase-js'
 import type { Meme, MemeStorage } from '../../types/meme'
+import { db } from '../db'
 
 export class SupabaseMemeStorage implements MemeStorage {
   private supabase
 
-  constructor(supabaseUrl: string, supabaseKey: string) {
-    this.supabase = createClient(supabaseUrl, supabaseKey)
+  constructor() {
+    this.supabase = db
   }
 
   async getMemes(): Promise<Meme[]> {
