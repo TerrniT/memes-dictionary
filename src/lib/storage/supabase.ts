@@ -18,12 +18,12 @@ export class SupabaseMemeStorage implements MemeStorage {
     return data as Meme[]
   }
 
-  async addMeme(meme: Omit<Meme, 'id' | 'addDate' | 'group'>): Promise<Meme> {
+  async addMeme(meme: Omit<Meme, 'id' | 'add_date' | 'group'>): Promise<Meme> {
     const group = meme.content.charAt(0).toUpperCase()
     const newMeme = {
       content: meme.content,
       group,
-      addDate: new Date().toISOString()
+      add_date: new Date().toISOString()
     }
 
     const { data, error } = await this.supabase

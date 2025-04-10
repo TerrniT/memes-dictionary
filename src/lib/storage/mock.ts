@@ -7,11 +7,11 @@ export class MockMemeStorage implements MemeStorage {
     return this.memes
   }
 
-  async addMeme(meme: Omit<Meme, 'id' | 'addDate' | 'group'>): Promise<Meme> {
+  async addMeme(meme: Omit<Meme, 'id' | 'add_date' | 'group'>): Promise<Meme> {
     const newMeme: Meme = {
       id: crypto.randomUUID(),
       content: meme.content,
-      addDate: new Date().toISOString(),
+      add_date: new Date().toISOString(),
       group: meme.content.charAt(0).toUpperCase()
     }
     
