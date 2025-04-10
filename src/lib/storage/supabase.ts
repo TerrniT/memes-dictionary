@@ -32,8 +32,6 @@ export class SupabaseMemeStorage implements MemeStorage {
       .select()
       .single()
 
-      console.log(data, error, 'HELLO ADD NEW MEME')
-
     if (error) throw error
     return data as Meme
   }

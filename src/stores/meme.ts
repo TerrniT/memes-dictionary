@@ -14,7 +14,8 @@ const storage = import.meta.env.DEV ? new MockMemeStorage() : new SupabaseMemeSt
 
 export const useMemeStore = defineStore('meme', {
   state: () => ({
-    memes: [] as Meme[]
+    memes: [] as Meme[],
+    loading: false
   }),
   
   getters: {
@@ -33,13 +34,26 @@ export const useMemeStore = defineStore('meme', {
 
   actions: {
     async fetchMemes() {
-      this.memes = await storage.getMemes()
-      console.log(this.memes, 'MEMES AFTER FETCH')
+      try {
+        this.loading = true
+        this.memes = await storage.getMemes()
+      } catch (error) {
+        console.error('Error fetching memes:', error)
+      } finally {
+        this.loading = false
+      }
     },
 
     async addMeme(content: string) {
-      const meme = await storage.addMeme({ content })
-      this.memes.push(meme)
+      try {
+        this.loading = true
+        const meme = await storage.addMeme({ content })
+        this.memes.push(meme)
+      } catch (error) {
+        console.error('Error adding meme:', error)
+      } finally {
+        this.loading = false
+      }
     }
   }
 })
