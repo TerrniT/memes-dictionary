@@ -19,7 +19,7 @@ const memeStore = useMemeStore()
         >
           <p class="text-lg">{{ meme.content }}</p>
           <p v-if="meme.add_date" class="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Added: {{ new Date(meme.add_date).toLocaleDateString() }}
+            Добавлено: {{ new Date(meme.add_date).toLocaleDateString() }}
           </p>
         </div>
       </div>
